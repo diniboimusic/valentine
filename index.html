@@ -55,49 +55,46 @@
             gap: 20px;
         }
         
-        .hidden-image-wrapper {
+        .image-wrapper {
             position: relative;
-            width: 300px;
-            height: 300px;
-            border-radius: 10px;
             border: 3px solid #d63384;
+            border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: #f8d7da;
+            display: inline-block; /* Adjusts to image size */
+        }
+        
+        .reveal-button {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(214, 51, 132, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 2;
+            transition: background 0.3s ease;
+        }
+        
+        .reveal-button:hover {
+            background: rgba(214, 51, 132, 1);
         }
         
         .hidden-image {
+            display: block;
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            height: auto;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
         
-        .hidden-image-wrapper::before {
-            content: "Click to reveal";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
-            text-align: center;
-        }
-        
         .revealed {
             opacity: 1;
-        }
-        
-        .revealed::before {
-            display: none;
         }
         
         .puzzle-container {
@@ -160,7 +157,8 @@
                 
                 imageFilenames.forEach(filename => {
                     document.write(`
-                        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+                        <div class="image-wrapper">
+                            <button class="reveal-button" onclick="revealImage(this)">Click to Reveal</button>
                             <img class="hidden-image" src="${filename}" alt="Surprise Image">
                         </div>
                     `);
@@ -178,12 +176,11 @@
     </div>
     
     <script>
-        function revealImage(wrapper) {
-            let img = wrapper.querySelector(".hidden-image");
-            img.classList.add("revealed");
-            wrapper.style.position = 'relative'; // Ensure the wrapper is positioned correctly
-            wrapper.innerHTML = "";
-            wrapper.appendChild(img);
+        function revealImage(button) {
+            const imageWrapper = button.parentElement;
+            const image = imageWrapper.querySelector(".hidden-image");
+            image.classList.add("revealed");
+            button.style.display = "none"; // Hide the button after revealing the image
         }
         
         function checkAnswer() {
