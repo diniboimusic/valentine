@@ -7,43 +7,42 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffdde1;
             text-align: center;
             padding: 50px;
             color: #d63384;
             overflow-y: auto;
+            animation: backgroundChange 10s infinite alternate;
         }
+        
+        @keyframes backgroundChange {
+            0% { background-color: #ffdde1; }
+            25% { background-color: #ffc2d1; }
+            50% { background-color: #ffb3c6; }
+            75% { background-color: #ff8fab; }
+            100% { background-color: #ff758f; }
+        }
+        
         h1 {
             font-size: 2.5em;
             animation: fadeIn 2s ease-in-out;
-        }
-        .hidden-image {
-            display: none;
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: opacity 1s ease-in-out;
-            margin: 10px;
         }
         .image-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            gap: 20px;
         }
-        .image-container button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        .hidden-image {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: opacity 1s ease-in-out;
             cursor: pointer;
-            transition: transform 0.3s;
+            opacity: 0;
         }
-        .image-container button:hover {
-            transform: scale(1.1);
+        .revealed {
+            opacity: 1;
         }
         .puzzle-container {
             margin-top: 30px;
@@ -89,35 +88,16 @@
     <h1>Happy Valentine's Day, My Love ❤️</h1>
     
     <div class="image-container">
-        <button onclick="revealImage('img1')">Click to reveal Image 1</button>
-        <img id="img1" class="hidden-image" src="WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg" alt="Surprise Image 1">
-        
-        <button onclick="revealImage('img2')">Click to reveal Image 2</button>
-        <img id="img2" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg" alt="Surprise Image 2">
-        
-        <button onclick="revealImage('img3')">Click to reveal Image 3</button>
-        <img id="img3" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg" alt="Surprise Image 3">
-        
-        <button onclick="revealImage('img4')">Click to reveal Image 4</button>
-        <img id="img4" class="hidden-image" src="WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg" alt="Surprise Image 4">
-        
-        <button onclick="revealImage('img5')">Click to reveal Image 5</button>
-        <img id="img5" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg" alt="Surprise Image 5">
-        
-        <button onclick="revealImage('img6')">Click to reveal Image 6</button>
-        <img id="img6" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg" alt="Surprise Image 6">
-        
-        <button onclick="revealImage('img7')">Click to reveal Image 7</button>
-        <img id="img7" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg" alt="Surprise Image 7">
-        
-        <button onclick="revealImage('img8')">Click to reveal Image 8</button>
-        <img id="img8" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg" alt="Surprise Image 8">
-
-        <button onclick="revealImage('img9')">Click to reveal Image 9</button>
-        <img id="img9" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg" alt="Surprise Image 9">
-
-         <button onclick="revealImage('img10')">Click to reveal Image 10</button>
-        <img id="img10" class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10">
+        <img id="img1" class="hidden-image" src="WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg" alt="Surprise Image 1" onclick="revealImage(this)">
+        <img id="img2" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg" alt="Surprise Image 2" onclick="revealImage(this)">
+        <img id="img3" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg" alt="Surprise Image 3" onclick="revealImage(this)">
+        <img id="img4" class="hidden-image" src="WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg" alt="Surprise Image 4" onclick="revealImage(this)">
+        <img id="img5" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg" alt="Surprise Image 5" onclick="revealImage(this)">
+        <img id="img6" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg" alt="Surprise Image 6" onclick="revealImage(this)">
+        <img id="img7" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg" alt="Surprise Image 7" onclick="revealImage(this)">
+        <img id="img8" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg" alt="Surprise Image 8" onclick="revealImage(this)">
+        <img id="img9" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg" alt="Surprise Image 9" onclick="revealImage(this)">
+        <img id="img10" class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10" onclick="revealImage(this)">
     </div>
     
     <div class="puzzle-container">
@@ -129,13 +109,8 @@
     </div>
     
     <script>
-        function revealImage(id) {
-            let img = document.getElementById(id);
-            img.style.display = "block";
-            img.style.opacity = "0";
-            setTimeout(() => {
-                img.style.opacity = "1";
-            }, 100);
+        function revealImage(imgElement) {
+            imgElement.classList.add("revealed");
         }
         
         function checkAnswer() {
