@@ -24,8 +24,9 @@
         
         h1 {
             font-size: 2.5em;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeIn 3s ease-in-out;
         }
+        
         .image-container {
             display: flex;
             flex-wrap: wrap;
@@ -54,16 +55,18 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             overflow: hidden;
-            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8d7da;
         }
         
         .hidden-image {
             width: 100%;
             height: 100%;
-            border-radius: 10px;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            transition: transform 0.6s;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
         
         .hidden-image-wrapper::before {
@@ -81,7 +84,42 @@
         }
         
         .revealed {
-            transform: rotateY(0deg);
+            opacity: 1;
+        }
+        
+        .puzzle-container {
+            margin-top: 30px;
+        }
+        #puzzleInput {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ff4d6d;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 250px;
+        }
+        #submitButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #d63384;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #submitButton:hover {
+            transform: scale(1.1);
+        }
+        #hiddenMessage, #errorMessage {
+            display: none;
+            font-size: 1.5em;
+            background: #ff4d6d;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease-in-out;
         }
     </style>
 </head>
@@ -89,36 +127,28 @@
     <h1>Happy Valentine's Day, My Love ❤️</h1>
     
     <div class="image-container">
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg" alt="Surprise Image 1">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg" alt="Surprise Image 2">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg" alt="Surprise Image 3">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg" alt="Surprise Image 4">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg" alt="Surprise Image 5">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg" alt="Surprise Image 6">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg" alt="Surprise Image 7">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg" alt="Surprise Image 8">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg" alt="Surprise Image 9">
-        </div>
-        <div class="hidden-image-wrapper" onclick="revealImage(this)">
-            <img class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10">
-        </div>
+        <script>
+            const imageFilenames = [
+                "valentine1.jpg", "valentine2.jpg", "valentine3.jpg", "valentine4.jpg", "valentine5.jpg",
+                "valentine6.jpg", "valentine7.jpg", "valentine8.jpg", "valentine9.jpg", "valentine10.jpg"
+            ];
+            
+            imageFilenames.forEach(filename => {
+                document.write(`
+                    <div class="hidden-image-wrapper" onclick="revealImage(this)">
+                        <img class="hidden-image" src="${filename}" alt="Surprise Image">
+                    </div>
+                `);
+            });
+        </script>
+    </div>
+    
+    <div class="puzzle-container">
+        <h2>What is the first Tamil word that I told you that means the most to me? 💌</h2>
+        <input type="text" id="puzzleInput" placeholder="Type your guess here...">
+        <button id="submitButton" onclick="checkAnswer()">Submit</button>
+        <p id="hiddenMessage">You guessed it! I love you forever ❤️</p>
+        <p id="errorMessage" style="display: none; color: red; font-size: 1.2em;">Try again, love 💕</p>
     </div>
     
     <script>
