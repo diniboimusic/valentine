@@ -11,6 +11,7 @@
             padding: 50px;
             color: #d63384;
             animation: backgroundChange 10s infinite alternate;
+            overflow-y: auto; /* Allows full-page scrolling */
         }
         
         @keyframes backgroundChange {
@@ -31,30 +32,30 @@
             to { opacity: 1; }
         }
         
-        .scroll-container {
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: #d63384 #ffdde1;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            border-radius: 10px;
         }
-        
-        .scroll-container::-webkit-scrollbar {
-            width: 10px;
+
+        ::-webkit-scrollbar-track {
+            background: #ffdde1;
+            border-radius: 10px;
         }
-        
-        .scroll-container::-webkit-scrollbar-thumb {
+
+        ::-webkit-scrollbar-thumb {
             background: #d63384;
             border-radius: 10px;
         }
-        
+
         .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
         }
-        
+
         .image-wrapper {
             position: relative;
             border: 3px solid #d63384;
@@ -62,9 +63,8 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             background: #f8d7da;
-            display: inline-block; /* Adjusts to image size */
         }
-        
+
         .reveal-button {
             position: absolute;
             top: 10px;
@@ -80,11 +80,11 @@
             z-index: 2;
             transition: background 0.3s ease;
         }
-        
+
         .reveal-button:hover {
             background: rgba(214, 51, 132, 1);
         }
-        
+
         .hidden-image {
             display: block;
             max-width: 100%;
@@ -92,15 +92,15 @@
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
-        
+
         .revealed {
             opacity: 1;
         }
-        
+
         .puzzle-container {
             margin-top: 30px;
         }
-        
+
         .puzzle-container input {
             padding: 10px;
             font-size: 16px;
@@ -110,11 +110,11 @@
             width: 250px;
             transition: border-color 0.3s ease;
         }
-        
+
         .puzzle-container input:focus {
             border-color: #ff758f;
         }
-        
+
         .puzzle-container button {
             padding: 10px 20px;
             font-size: 16px;
@@ -125,11 +125,11 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        
+
         .puzzle-container button:hover {
             background-color: #ff758f;
         }
-        
+
         #hiddenMessage, #errorMessage {
             font-size: 1.2em;
             display: none;
@@ -138,35 +138,33 @@
 </head>
 <body>
     <h1>Happy Valentine's Day, My Love ❤️</h1>
-    
-    <div class="scroll-container" id="scrollContainer">
-        <div class="image-container">
-            <script>
-                const imageFilenames = [
-                    "WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg", 
-                    "WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg", 
-                    "WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg", 
-                    "WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg"
-                ];
-                
-                imageFilenames.forEach(filename => {
-                    document.write(`
-                        <div class="image-wrapper">
-                            <button class="reveal-button" onclick="revealImage(this)">Click to Reveal</button>
-                            <img class="hidden-image" src="${filename}" alt="Surprise Image">
-                        </div>
-                    `);
-                });
-            </script>
-        </div>
+
+    <div class="image-container">
+        <script>
+            const imageFilenames = [
+                "WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg", 
+                "WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg", 
+                "WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg", 
+                "WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg"
+            ];
+            
+            imageFilenames.forEach(filename => {
+                document.write(`
+                    <div class="image-wrapper">
+                        <button class="reveal-button" onclick="revealImage(this)">Click to Reveal</button>
+                        <img class="hidden-image" src="${filename}" alt="Surprise Image">
+                    </div>
+                `);
+            });
+        </script>
     </div>
-    
+
     <div class="puzzle-container">
         <h2>What is the first Tamil word that I told you that means the most to me? 💌</h2>
         <input type="text" id="puzzleInput" placeholder="Type your guess here...">
@@ -174,7 +172,7 @@
         <p id="hiddenMessage">You guessed it! I love you forever ❤️</p>
         <p id="errorMessage" style="color: red;">Try again, honey 💕</p>
     </div>
-    
+
     <script>
         function revealImage(button) {
             const imageWrapper = button.parentElement;
