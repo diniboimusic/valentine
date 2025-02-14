@@ -46,8 +46,9 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
             opacity: 0;
+            transform: scale(0.9);
         }
         .hidden-image-wrapper::before {
             content: "Click to reveal";
@@ -64,6 +65,7 @@
         }
         .revealed {
             opacity: 1;
+            transform: scale(1);
         }
         .puzzle-container {
             margin-top: 30px;
@@ -139,14 +141,6 @@
         <div class="hidden-image-wrapper" onclick="revealImage(this)">
             <img class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10">
         </div>
-    </div>
-    
-    <div class="puzzle-container">
-        <h2>What is the first Tamil word that I told you that means the most to me? 💌</h2>
-        <input type="text" id="puzzleInput" placeholder="Type your guess here...">
-        <button id="submitButton" onclick="checkAnswer()">Submit</button>
-        <p id="hiddenMessage">You guessed it! I love you forever ❤️</p>
-        <p id="errorMessage" style="display: none; color: red; font-size: 1.2em;">Try again, love 💕</p>
     </div>
     
     <script>
