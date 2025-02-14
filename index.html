@@ -10,7 +10,6 @@
             text-align: center;
             padding: 50px;
             color: #d63384;
-            overflow-y: hidden;
             animation: backgroundChange 10s infinite alternate;
         }
         
@@ -74,7 +73,7 @@
         .hidden-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
@@ -95,6 +94,10 @@
         
         .revealed {
             opacity: 1;
+        }
+        
+        .revealed::before {
+            display: none;
         }
         
         .qa-section {
@@ -155,14 +158,10 @@
         function revealImage(wrapper) {
             let img = wrapper.querySelector(".hidden-image");
             img.classList.add("revealed");
+            wrapper.style.position = 'relative'; // Ensure the wrapper is positioned correctly
             wrapper.innerHTML = "";
             wrapper.appendChild(img);
         }
-        
-        document.getElementById("scrollContainer").addEventListener("wheel", function(event) {
-            event.preventDefault();
-            this.scrollTop += event.deltaY;
-        });
         
         function checkAnswer() {
             let answer = document.getElementById("puzzleInput").value.toLowerCase();
