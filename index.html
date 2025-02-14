@@ -32,14 +32,35 @@
             justify-content: center;
             gap: 20px;
         }
-        .hidden-image {
+        .hidden-image-wrapper {
+            position: relative;
             width: 300px;
             height: auto;
             border-radius: 10px;
+            border: 3px solid #d63384;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: opacity 1s ease-in-out;
             cursor: pointer;
+            overflow: hidden;
+        }
+        .hidden-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 1s ease-in-out;
             opacity: 0;
+        }
+        .hidden-image-wrapper::before {
+            content: "Click to reveal";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
         }
         .revealed {
             opacity: 1;
@@ -88,16 +109,36 @@
     <h1>Happy Valentine's Day, My Love ❤️</h1>
     
     <div class="image-container">
-        <img id="img1" class="hidden-image" src="WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg" alt="Surprise Image 1" onclick="revealImage(this)">
-        <img id="img2" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg" alt="Surprise Image 2" onclick="revealImage(this)">
-        <img id="img3" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg" alt="Surprise Image 3" onclick="revealImage(this)">
-        <img id="img4" class="hidden-image" src="WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg" alt="Surprise Image 4" onclick="revealImage(this)">
-        <img id="img5" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg" alt="Surprise Image 5" onclick="revealImage(this)">
-        <img id="img6" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg" alt="Surprise Image 6" onclick="revealImage(this)">
-        <img id="img7" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg" alt="Surprise Image 7" onclick="revealImage(this)">
-        <img id="img8" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg" alt="Surprise Image 8" onclick="revealImage(this)">
-        <img id="img9" class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg" alt="Surprise Image 9" onclick="revealImage(this)">
-        <img id="img10" class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10" onclick="revealImage(this)">
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2024-12-15 at 13.19.41_eca6b11d.jpg" alt="Surprise Image 1">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.15_9b2710bc.jpg" alt="Surprise Image 2">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.17_1025c840.jpg" alt="Surprise Image 3">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-01-15 at 18.15.36_a4ba7809.jpg" alt="Surprise Image 4">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.26_9f6570c0.jpg" alt="Surprise Image 5">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_298af8e0.jpg" alt="Surprise Image 6">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.27_61f833f3.jpg" alt="Surprise Image 7">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_37f339af.jpg" alt="Surprise Image 8">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2025-02-14 at 13.31.36_951d002c.jpg" alt="Surprise Image 9">
+        </div>
+        <div class="hidden-image-wrapper" onclick="revealImage(this)">
+            <img class="hidden-image" src="WhatsApp Image 2024-12-08 at 11.38.48_29dc25aa.jpg" alt="Surprise Image 10">
+        </div>
     </div>
     
     <div class="puzzle-container">
@@ -109,22 +150,11 @@
     </div>
     
     <script>
-        function revealImage(imgElement) {
-            imgElement.classList.add("revealed");
-        }
-        
-        function checkAnswer() {
-            let answer = document.getElementById("puzzleInput").value.toLowerCase();
-            let hiddenMessage = document.getElementById("hiddenMessage");
-            let errorMessage = document.getElementById("errorMessage");
-            
-            if (answer === "kadhal") {
-                hiddenMessage.style.display = "block";
-                errorMessage.style.display = "none";
-            } else {
-                hiddenMessage.style.display = "none";
-                errorMessage.style.display = "block";
-            }
+        function revealImage(wrapper) {
+            let img = wrapper.querySelector(".hidden-image");
+            img.classList.add("revealed");
+            wrapper.innerHTML = "";
+            wrapper.appendChild(img);
         }
     </script>
 </body>
